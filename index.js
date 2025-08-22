@@ -1,10 +1,10 @@
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 dotenv.config();
 import { connectDB } from "./DB/connection.js";
 import APP from "./src/app.js";
 // modules
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 // environment
 
 // connection to DB and APP listens //
@@ -16,11 +16,12 @@ connectDB()
     APP.listen(PORT, function () {
       return console.log(`App starts listening on port: ${PORT}`);
     });
+    APP.get('/', (req, res) => {
+      res.send("Hello World");
+    })
     return null;
   })
   .catch(function (err) {
     return console.log(err);
   });
 // connection to DB and APP listens //
-
-
